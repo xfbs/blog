@@ -30,9 +30,6 @@ GEM
     jekyll-feed (0.10.0)
       jekyll (~> 3.3)
     jekyll-paginate (1.1.0)
-    jekyll-remote-theme (0.3.1)
-      jekyll (~> 3.5)
-      rubyzip (>= 1.2.1, < 3.0)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
     jekyll-typogrify (0.3.5)
@@ -58,13 +55,16 @@ GEM
     rouge (3.2.1)
     ruby_dep (1.5.0)
     rubypants (0.7.0)
-    rubyzip (1.2.2)
     safe_yaml (1.0.4)
     sass (3.5.7)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+    tale (0.1.4)
+      jekyll (~> 3.6)
+      jekyll-feed (~> 0.10.0)
+      jekyll-paginate (~> 1.1)
     titlecase (0.1.1)
     typogruby (1.0.18)
       rubypants
@@ -75,10 +75,9 @@ PLATFORMS
 DEPENDENCIES
   jekyll (~> 3.8.3)
   jekyll-feed (~> 0.6)
-  jekyll-paginate
-  jekyll-remote-theme
   jekyll-typogrify
   jekyll-youtube
+  tale
 
 BUNDLED WITH
    1.16.4

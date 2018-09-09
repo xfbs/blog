@@ -1,0 +1,45 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import 'tale';
+
+$serif-primary: 'Vollkorn', 'Libre Baskerville', 'Baskerville', 'Times New Roman', Times, serif;
+$serif-smallcaps: 'Vollkorn SC', $serif-primary;
+$code-color: #961b26;
+
+html {
+  font-family: $serif-primary;
+  font-size: 16px;
+  overflow-y: scroll;
+
+  @media (min-width: 600px) {
+    font-size: 18px;
+  }
+}
+
+code {
+  font-size: 85%;
+  padding: .1em .2em;
+  color: $code-color;
+}
+
+pre {
+  font-size: 85%;
+}
+
+.container {
+  width: 90%;
+}
+
+main,
+footer,
+.nav-container {
+  width: 90%;
+}
+
+.catalogue {
+  &-time {
+    font-family: $serif-primary;
+  }
+}
