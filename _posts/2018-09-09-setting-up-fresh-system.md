@@ -5,42 +5,44 @@ date:   2018-09-09
 author: xfbs
 ---
 
-I just bought a new MacBook since I managed to break my old one while travelling in Taiwan. This is a good chance to review all the apps I need on my system. The essential things I installed right away to get started were:
+I just bought a new MacBook since I managed to break my old one while travelling in Taiwan. I always love getting a new system, because the setting up phase is a good opportunity to get rid of old cruft and review what is essential for me.
 
-- [Homebrew][], the de-facto standard package manager for macOS.
-- [Xcode][], for iOS/macOS app development.
-- [Dash][], an offline documentation viewer/browser.
-- [Firefox][], always good to have another browser besides Safari on your system. Some people prefer Chrome.
-- [MacTeX][], a LaTeX distribution for macOS.
-- [VirtualBox][] to run VMs, mostly for development. Some people prefer VMware.
-- [Textual][], awesome IRC client.
-- [Texpad][], awesome LaTeX editor.
-- [Sublime Text][], awesome programmer's text editor.
+What I like about macOS is that it comes with a lot of great tools out-of-the-box. However, I still ended up having to install a few essentials to get me started.
+
+- [Homebrew][], the de-facto standard package manager for macOS. Necessary to install apps, mostly command-line related, and keep them up-to-date.
+- [Xcode][] for iOS and macOS app development. Xcode is actually surprisingly nice, but I don't use it outside of app development.
+- [Dash][], an offline documentation viewer. Great interface lets you find things faster and allows you to work offline.
+- [Firefox][] because it is always good to have another browser besides Safari, however some people prefer [Chrome][].
+- [MacTeX][], a LaTeX distribution for macOS. Necessary if you are a student and have to write papers that look decent.
+- [VirtualBox][] to run <abbr title="Virtual Machine">VM</abbr>s, mostly for development. Some people prefer [VMware][], which I have never tried.
+- [Textual][], awesome <abbr title="Internet Relay Chat">IRC</abbr> client.
+- [Texpad][], a LaTeX editor with some nifty features.
+- [Sublime Text][], awesome programmer's text editor. 
 
 Additionally, I also installed a couple of apps that are not strictly necessary, but I still use them occasionally.
 
-- [Git Up][], a GUI for interacting with *git* repositories.
-- [VLC][], the famous media player that can play *anything*.
+- [Git Up][], a <abbr title="Guided User Interface">GUI</abbr> for interacting with Git repositories.
+- [<abbr title="VideoLAN Client">VLC</abbr>][VLC], the famous media player that can play *anything*.
 - [Transmission][], awesome Torrent client.
 - [OpenEmu][], for playing those old Mario games.
 
-Instead of using the awesome Shimo app, I opted for using the native IKEv2 support in macOS to set up some of my VPNs. It is always useful to have a few in case you are forced to use a questionable public WiFi. I probably will need to set up Shimo anyways to access my university's VPN at some point in time.
+Instead of using the awesome [Shimo][] app, I opted for using the native <abbr title="Internet Key Exchange">IKE</abbr>v2 support in macOS to set up some of my <abbr title="Virtual Private Network">VPN</abbr>s. It is always useful to have a few in case you are forced to use a questionable public WiFi. I probably will need to set up Shimo anyways to access my university's <abbr>VPN</abbr> at some point in time.
 
-Out-of-the box, macOS has a bunch of great things already, but some of the tools it ships with are out-of-date.
+With homebrew installed, I went on to installing some essential command-line tools, and updating others that Apple ships but are too old.
 
-- [git][] version control system. I keep a lot of things under [git]{.acr} control, such as this blog.
-- [vim][], the ubiquitous editor. My go-to editor for a lot of things. Ships out-of-the-box on macOS (thank you Apple!), but with an outdated version. Some people prefer the newer [NeoVim][], others like Emacs and some people don't like any command-line text-editors.
-- tmux
-- [ruby][], my favourite programming language. Also ships out-of-the-box on macOS, but with an outdated version.
-- [rust][], Mozilla's fancy-pants new language. 
+- [Git][] version control system. I keep a lot of things under its control, such as this blog.
+- [<abbr title="VI Improved">VIM</abbr>][VIM], the ubiquitous editor. My go-to editor for a lot of things. Ships out-of-the-box on macOS (thank you Apple!), but with an outdated version. Some people prefer the newer [NeoVim][], others like [Emacs][] and some people don't like any command-line text-editors.
+- [tmux][], for having multiple tabs in a single Terminal session.
+- [Ruby][], my favourite programming language. Also ships out-of-the-box on macOS, but with an outdated version.
+- [Rust][], Mozilla's fancy-pants new language. 
 
 ## Dash
 
-Dash is an offline documentation browser. That means that it has a catalog of documentation for various programming languages, frameworks, *gems*, *pods*, tools, etc. These are called *docsets*. Most docsets are official and autogenerated or maintained by the author, but there are also plenty of user-contributed ones. The format is open, such that you can create your own docsets. There are also a bunch of Dash clones for other platforms that use them, such as [Zeal][] on Linux or [Velocity][] on Microsoft Windows. 
+Dash is an offline documentation browser. That means that it has a catalog of documentation for various programming languages, frameworks, gems, pods, tools, etc. These are called *docsets*. Most docsets are official and autogenerated or maintained by the author, but there are also plenty of user-contributed ones. The format is open, such that you can create your own docsets. There are also a bunch of Dash clones for other platforms that use them, such as [Zeal][] on Linux or [Velocity][] on Microsoft Windows. 
 
 ![Dash](/assets/images/dash_app_screenshot.png)
 
-I love Dash because the interface is well-designed. For example if you want to find out something about the Ruby *Array#join* method, you try `ruby: Array join` into the search field. I find that using Dash is far more effective that googling for things, and you can explore classes and find out what methods they have. The docsets are really good and auto-update, which is important for languages like Rust that have new releases often.
+I love Dash because the interface is well-designed. For example if you want to find out something about the Ruby `Array#join` method, you try `ruby: Array join` into the search field. I find that using Dash is far more effective that googling for things, and you can explore classes and find out what methods they have. The docsets are really good and auto-update, which is important for languages like Rust that have new releases often.
 
 Another interesting feature is that Dash can download all [StackOverflow][] answers that are tagged to a specific programming language or framework. This can sometimes be useful if you can't figure out from the documentation how things fit together, but I don't use that feature much.
 
@@ -48,11 +50,16 @@ I bought a license back in 2015 for around 28€ (about $30). That license still
 
 ## Textual
 
-[git]: https://git-scm.com
-[vim]: https://www.vim.org
+[Emacs]: https://www.gnu.org/software/emacs/
+[tmux]: https://github.com/tmux/tmux/wiki
+[Shimo]: https://www.shimovpn.com/
+[Chrome]: https://www.google.com/chrome/
+[VMware]: https://www.vmware.com
+[Git]: https://git-scm.com
+[VIM]: https://www.vim.org
 [NeoVim]: https://neovim.io
-[ruby]: https://www.ruby-lang.org
-[rust]: https://www.rust-lang.org/
+[Ruby]: https://www.ruby-lang.org
+[Rust]: https://www.rust-lang.org/
 [Homebrew]: https://brew.sh/
 [Dash]: https://kapeli.com/dash
 [Firefox]: https://mozilla.org/firefox

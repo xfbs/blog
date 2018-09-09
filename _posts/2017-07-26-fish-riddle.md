@@ -5,7 +5,7 @@ date:   2017-07-26
 author: xfbs
 ---
 
-The internet is full of distractions, and unfortunately, I am not always impervious to all of them. Some of them can lead to interesting results. Today, my distraction came in the shape of a riddle from a riddle from a TED-Ed video, which got me to explore my (rusty, but still somewhat present) math skills.
+The internet is full of distractions, and unfortunately, I am not always impervious to all of them. Some of them can lead to interesting results. Today, my distraction came in the shape of a riddle from a riddle from a <abbr>TED</abbr>-Ed video, which got me to explore my (rusty, but still somewhat present) math skills.
 
 {% youtube https://youtu.be/lLOALyWls2k&rel=0 %}
 

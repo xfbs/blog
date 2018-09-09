@@ -11,7 +11,7 @@ If you haven’t heard of them before or haven’t had the chance to play with t
 
 ## Tracing syscalls
 
-Let’s say you have an application, a small program, and you want to know analyze what it does. In this example, I’ll use a small program that checks if a file is present — if it’s not present, it will fail with a warning. I am using the `access` function, which is a POSIX API, to check if a file exists.
+Let’s say you have an application, a small program, and you want to know analyze what it does. In this example, I’ll use a small program that checks if a file is present — if it’s not present, it will fail with a warning. I am using the `access` function, which is a <abbr title="Portable Operating System Interface">POSIX</abbr> <abbr title="Application Programming Interface">API</abbr>, to check if a file exists.
 
 ###### File safe.c, lines 0–31:
 
@@ -60,7 +60,7 @@ all: safe
 
 ### On Linux
 
-I’m using a fresh Ubuntu VM to perform these tests. You’ll need some packages to compile this example — `make`, a compiler (`gcc` or `clang` will do just fine), and optionally `musl` and `musl-gcc`.
+I’m using a fresh Ubuntu <abbr title="Virtual Machine">VM</abbr> to perform these tests. You’ll need some packages to compile this example — `make`, a compiler (`gcc` or `clang` will do just fine), and optionally `musl` and `musl-gcc`.
 
     $ apt update
     $ apt install -y build-essential musl musl-dev musl-tools
@@ -103,14 +103,14 @@ Compilation on macOS works basically the same way as it does on Linux — but no
     $ make safe
     cc safe.c -o safe
 
-Unfortunately, `strace` itself doesn’t exist on macOS. That would be too easy, wouldn’t it? Instead, there is something else, called *DTrace*, which is actually fairly comprehensive and complicated — there is [a book](http://dtrace.org/guide/preface.html#preface) on it, there are [quite](https://8thlight.com/blog/colin-jones/2015/11/06/dtrace-even-better-than-strace-for-osx.html) a [few](https://blog.wallaroolabs.com/2017/12/dynamic-tracing-a-pony---python-program-with-dtrace/) blog [posts](https://hackernoon.com/running-a-process-for-exactly-ten-minutes-c6921f93a4a9) about it, but don’t be intimidated yet.
+Unfortunately, `strace` itself doesn’t exist on macOS. That would be too easy, wouldn’t it? Instead, there is something else, called *dtrace*, which is actually fairly comprehensive and complicated — there is [a book](http://dtrace.org/guide/preface.html#preface) on it, there are [quite](https://8thlight.com/blog/colin-jones/2015/11/06/dtrace-even-better-than-strace-for-osx.html) a [few](https://blog.wallaroolabs.com/2017/12/dynamic-tracing-a-pony---python-program-with-dtrace/) blog [posts](https://hackernoon.com/running-a-process-for-exactly-ten-minutes-c6921f93a4a9) about it, but don’t be intimidated yet.
 
-You don’t need to know all of `DTrace` to be able to use it, all you need to know is which fontends do what. And the `dtruss` font-end happens to do basically the same as `strace`, meaning that it’ll show you which syscalls a binary performs. Let’s try it.
+You don’t need to know all of `dtrace` to be able to use it, all you need to know is which fontends do what. And the `dtruss` font-end happens to do basically the same as `strace`, meaning that it’ll show you which syscalls a binary performs. Let’s try it.
 
     $ dtruss ./safe
     dtrace: failed to initialize dtrace: DTrace requires additional privileges
 
-Well, DTrace doesn’t work the same way as `strace` does, in spite of their similar naming. While `strace` just politely asks the kernel to monitor a process, `DTrace` hooks directly into the kernel, meaning that you potentially have access to every secret of every user, and you can actually break things (if you try really, *really* hard). Needless to say, `DTrace` and any related tools require `root` privileges to use.
+Well, `dtrace` doesn’t work the same way as `strace` does, in spite of their similar naming. While `strace` just politely asks the kernel to monitor a process, `dtrace` hooks directly into the kernel, meaning that you potentially have access to every secret of every user, and you can actually break things (if you try really, *really* hard). Needless to say, `dtrace` and any related tools require `root` privileges to use.
 
     $ sudo dtruss ./safe | tail -n 10
     issetugid(0x101B2F000, 0x88, 0x1) = 0 0
@@ -130,7 +130,7 @@ If you don’t pipe the output through `tail` (which you can try, if you are cur
     $ ./safe
     congratulations!
 
-There’s just one little gotcha with DTrace, or rather with macOS: You can’t, by default, trace builtin utilities, eg. anything in `/bin` or `/usr/bin`:
+There’s just one little gotcha with dtrace, or rather with macOS: You can’t, by default, trace builtin utilities, eg. anything in `/bin` or `/usr/bin`:
 
     $ sudo dtruss /bin/ls
     dtrace: failed to execute pp: dtrace cannot control executables signed with restricted entitlements
@@ -269,9 +269,9 @@ Compiling this under macOS is exactly the same as under Linux, with
     cc -c -o pass.o pass.c
     cc -o pass pass.o -lz
 
-However, once again we don’t have `ltrace` on macOS. And there isn’t really a direct equivalent to it — this is the part where we have to play around with DTrace. It took me a while to figure this out. Thankfully, there were a few useful [articles](https://www.joyent.com/blog/bruning-questions-debugging) and obviously, the [book](http://dtrace.org/guide/preface.html#preface).
+However, once again we don’t have `ltrace` on macOS. And there isn’t really a direct equivalent to it — this is the part where we have to play around with dtrace. It took me a while to figure this out. Thankfully, there were a few useful [articles](https://www.joyent.com/blog/bruning-questions-debugging) and obviously, the [book](http://dtrace.org/guide/preface.html#preface).
 
-The way `dtrace` works is that it offers problems — lots of them, actually. You can trace the probes themselves, or you can attach functions to them. I won’t really go into much detail about DTrace, there is simply too much, and I don’t understand all of it well enough yet to be able to explain it.
+The way `dtrace` works is that it offers problems — lots of them, actually. You can trace the probes themselves, or you can attach functions to them. I won’t really go into much detail about dtrace, there is simply too much, and I don’t understand all of it well enough yet to be able to explain it.
 
 To trace all function calls in pass, you could do:
 

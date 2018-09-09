@@ -43,3 +43,8 @@ footer,
     font-family: $serif-primary;
   }
 }
+
+abbr {
+  font-family: $serif-smallcaps;
+  text-transform: lowercase;
+}
