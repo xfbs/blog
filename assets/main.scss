@@ -28,6 +28,14 @@ pre {
   font-size: 85%;
 }
 
+.highlight {
+  padding: 0.3rem 0.5rem;
+}
+
+div.highlight {
+  border-left: 0.3rem solid $default-tint;
+}
+
 .container {
   width: 90%;
 }
@@ -38,13 +46,70 @@ footer,
   width: 90%;
 }
 
+// show normal serif in post list
 .catalogue {
   &-time {
     font-family: $serif-primary;
   }
 }
 
+// make abbr show it as small caps
 abbr {
   font-family: $serif-smallcaps;
   text-transform: lowercase;
+}
+
+// remove padding from top of post
+.post {
+  padding: 0 0 2rem;
+
+  &-info {
+    font-family: $serif-primary;
+    margin: 0.5em auto 1rem;
+
+    span {
+      font-style: normal;
+    }
+  }
+}
+
+// show underline under words with hover title thing
+span[title], abbr[title] {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  -webkit-text-decoration-style: dotted;
+}
+
+// add spacing under youtube embeds
+.embed-container {
+  margin: 0 0 1rem;
+}
+
+// same with table
+table {
+  margin: auto auto 1rem;
+  border-bottom: 0.1em solid $default-color;
+  border-top: 0.1em solid $default-color;
+  border-collapse: collapse;
+  border-spacing: 3rem;
+
+  th, td {
+    padding: 0.1em 1rem;
+  }
+
+  th:first-child, td:first-child {
+    padding-left: 0;
+  }
+
+  th:last-child, td:last-child {
+    padding-right: 0;
+  }
+
+  thead tr:last-child th {
+    border-bottom: 0.1em solid $default-color;
+  }
+
+  tbody tr td {
+    border-bottom: 0.05em dotted $default-tint;
+  }
 }

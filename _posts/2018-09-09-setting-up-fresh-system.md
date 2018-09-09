@@ -7,6 +7,8 @@ author: xfbs
 
 I just bought a new MacBook since I managed to break my old one while travelling in Taiwan. I always love getting a new system, because the setting up phase is a good opportunity to get rid of old cruft and review what is essential for me.
 
+![Clean and fresh macOS desktop](/assets/images/fresh_screenshot.png)
+
 ## Apps
 
 What I like about macOS is that it comes with a lot of great tools out-of-the-box. However, I still ended up having to install a few essentials to get me started.
@@ -53,7 +55,7 @@ I love Dash because the interface is well-designed. For example if you want to f
 
 Another interesting feature is that Dash can download all [StackOverflow][] answers that are tagged to a specific programming language or framework. This can sometimes be useful if you can't figure out from the documentation how things fit together, but I don't use that feature much.
 
-I bought a license for around 28€ (about $30). That license still works on Dash 4, which was released in 2017.
+It does cost some money, I paid around <span title="about $33" class="underlined">28€</span> for my license. But I think it is definitely worth it. Also, I think it is really awesome that my license, which I bought in 2015 for dash 3, was updated to work with dash 4 when it was released in 2017. Thanks Kapeli!
 
 ## Conclusion
 
