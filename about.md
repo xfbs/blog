@@ -6,7 +6,9 @@ permalink: /about/
 
 Hey there! Thanks for visiting my blog. 
 
-I am Patrick, a computer science student from Germany. I love to thinker with things. I also have some accounts on other popular places, if you want to check out what I'm working on or want to get in touch with me.
+I am Patrick, a computer science student from Germany. I love to thinker with things, especially anything involving computer science or electronics.
+
+## Where to find me
 
 <div class="icon-grid">
 {% icon_grid_item
