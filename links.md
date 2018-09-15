@@ -4,7 +4,11 @@ title: Links
 permalink: /links/
 ---
 
+The internet is awesome, so much knowledge and power just a few clicks away. But it is easy to get distracted---everyone is trying to compete for your attention by feeding you bite-sized bits of junk. But there are still some gems to be found that are worth checking, and these are few that I like.
+
 ## News
+
+As a computer scientist, it's quite important to know what is going on around you. On the technical side, that includes keeping up with trends and the latest developments in your field. But it might also mean checking what kinds of new products are being released, because these are the tools that we might use tomorrow. 
 
 <div class="icon-grid">
 {% icon_grid_item 
@@ -43,37 +47,29 @@ permalink: /links/
   url="https://www.recode.net"
   icon="https://cdn.vox-cdn.com/uploads/chorus_asset/file/6397047/recode_favicon-180.0.png"
 %}
-{% icon_grid_item
-  name="The Intercept"
-  title="News site"
-  url="https://theintercept.com"
-  icon="https://theintercept.com/static/apple-touch-icon-144x144.png"
-%}
-</div>
-
-## Blog
-
-<div class="icon-grid">
-{% icon_grid_item
-  name="Julia Evans"
-  title="Awesome technology blog"
-  url="https://jvns.ca/"
-  icon="https://jvns.ca/favicon.ico"
-%}
 </div>
 
 ## Podcasts
 
+Sometimes you need to spend an hour on a train on your commute to work, or you want a relaxing bedtime story to listen to before you sleep. Some people like to listen to audiobooks for this, or something that isn't related to computer science. But if you do like to learn a bit while you relax, these podcasts fit very well into that niche.
+
 <div class="icon-grid">
 {% icon_grid_item
-  name="Accidental Tech"
-  title="Tech podcast"
-  url="http://atp.fm"
-  icon=""
+  name="Data Sceptic"
+  title="Data science, statistics, machine learning, artificial intelligence, and scientific skepticism."
+  url="https://dataskeptic.com/"
+  icon="https://dataskeptic.com/favicon/apple-icon-180x180.png"
 %}
 {% icon_grid_item
   name="Radiolab"
-  title="Podcast"
+  title="Investigating a strange world."
   url="https://www.wnycstudios.org/shows/radiolab"
   icon="https://media.wnyc.org/i/200/200/l/85/1/Radiolab_WNYCStudios_Logo_1400px_J7t8KKf.png"
 %}
+{% icon_grid_item
+  name="Accidental Tech Podcast"
+  title="A tech podcast we accidentally created while trying to do a car show."
+  url="https://atp.fm/"
+  icon="http://static1.squarespace.com/static/513abd71e4b0fe58c655c105/t/52c45a37e4b0a77a5034aa84/1388599866232/1500w/Artwork.jpg"
+%}
+</div>
