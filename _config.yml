@@ -15,5 +15,5 @@ plugins:
   - jekyll-youtube
   - jekyll-typogrify
 
-permalink: /:year-:month-:day/:title
-paginate: 10
+permalink: /posts/:year-:month-:day/:title
+paginate: 25
