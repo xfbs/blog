@@ -1,9 +1,9 @@
 title: "xfbs:blog"
 email: pelsen@xfbs.net
-description: >- # this means to ignore newlines until "baseurl:"
+description: >-
   Personal blog of xfbs.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://blog.xfbs.net/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://blog.xfbs.net"
+baseurl: ""
 twitter_username: const_xfbs
 github_username:  xfbs
 
