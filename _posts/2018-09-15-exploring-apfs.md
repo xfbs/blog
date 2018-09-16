@@ -2,20 +2,18 @@
 layout: post
 title:  Exploring APFS
 date:   2018-09-15
-draft: true
+summary: "File systems are fascinating and scary. When I heard that Apple was working on its own in 2016, I was immediately interested. In this post, I will take a look at this file system and see what it's all about."
 ---
 
 File systems are fascinating and scary. When I heard that Apple was working on its own [in 2016][ArsTechnica], I was immediately interested. 
 
-With [<abbr title="File System in Userspace">FUSE</abbr>][FUSE], anyone can implement their own filesystem. But these run in userspace, where things are slower but protected from programming errors[^1]. Real file systems run in kernelspace[^2], and that is where things get interesting because programming errors can crash the system[^3]. But much worse than crashing a system, an error could also cause corruption or loss of data. 
-
-With that in mind, it becomes apparent that file system authors are incredibly talented people. Unless they are [currently in jail][Reiser], I suppose. 
+With [<abbr title="File System in Userspace">FUSE</abbr>][FUSE], anyone can implement their own filesystem. But these run in userspace, where things are slower but protected from programming errors[^1]. Real file systems run in kernelspace[^2], and that is where things get interesting because programming errors can crash the system[^3]. But much worse than crashing a system, an error could also cause corruption or loss of data. With that in mind, it becomes apparent that file system authors are incredibly talented people[^4]. 
 
 ## Motivations
 
-Before we examine <abbr>APFS</abbr>, let's take a minute to think about what the purpose is. 
+Before <abbr>APFS</abbr>, Apple used [<abbr title="Hierarchical File System Plus">HFS+</abbr>][HFSPlus], which was introduced in 1998 as an extension of [<abbr title="Hierarchical File System">HFS</abbr>][HFS], which was introduced in 1985. Both of these were designed for storage media like hard drives. 
 
-Before <abbr>APFS</abbr>, Apple used [<abbr title="Hierarchical File System Plus">HFS+</abbr>][HFSPlus], which was introduced in 1998 as an extension of [<abbr title="Hierarchical File System">HFS</abbr>][HFS], which was introduced in 1985. Both of these were designed for storage media like hard drives. These work similar to an old record player: they have rotating disks (usually multiple stacked on top of each other) with a round track consisting of the data, and they have a pickup that can move to follow the track or jump to another position.
+These work similar to an old record player: they have rotating disks (usually multiple stacked on top of each other) with a round track consisting of the data, and they have a pickup that can move to follow the track or jump to another position.
 
 ![Harddrive front](/assets/images/harddrive-front.svg){:width="20%"}
 
@@ -29,16 +27,16 @@ All was going well for file system architechts and implementors, until the <abbr
 
 As such, it has different properties that file system implementors need to watch out for. For once, when accessing data, there is almost no different between sequential and random access, meaning that the speed is the same if you read a file from beginning to end as if you access small bits in a random order. But the one issue is that <abbr>SSD</abbr>s have a limited life span, because the individual memory cells that it is made up of can only take so many writes.
 
-When Apple was designing <abbr>APFS</abbr>, one of the reasons behind that was that they designed it from the ground up to work well with <abbr>SSD</abbr> storage, which is now more common than traditional hard drives. While it is possible to add <abbr>SSD</abbr> support to existing file systems, for example by adding support for the <abbr title="A command used to inform an SSD drive that a block of memory is no longer used and can be wiped internally">TRIM</abbr>, it is easier to just start from scratch.
+When Apple was designing <abbr>APFS</abbr>, one of the reasons behind that was that they designed it from the ground up to work well with <abbr>SSD</abbr> storage, which is now more common than traditional hard drives. While it is possible to add <abbr>SSD</abbr> support to existing file systems, for example by adding support for the [<abbr title="A command used to inform an SSD drive that a block of memory is no longer used and can be wiped internally">TRIM</abbr> command][TRIM], it is easier to just start from scratch.
 
 ## Features
 
 <abbr>APFS</abbr> is a pragmatic successor to the previous <abbr>HFS+</abbr> in that it doesn't add anything crazy, but it does have some useful bits and pieces that we can look at in detail.
 
-- It natively supports **encryption**
+- It natively supports **encryption**.
 - It is possible to take **snapshots** of the state of the file system.
 - It supports **clones** of files.
-- It supports **space sharing**, which means that you can have multiple 
+- It supports **space sharing**, which means that you can have multiple *volumes* sharing the space on a single *container*.
 
 ### Encryption
 
@@ -95,6 +93,7 @@ Next, you need to make sure that the disk image is mounted. All you need to do t
 So far, I think that <abbr>APFS</abbr> is a very neat and stable system. I think it has some nice features, but it doesn't go overboard resulting in a theoretically cool, but practically unstable file system. 
 
 
+[TRIM]: https://en.wikipedia.org/wiki/Trim_(computing)
 [HFS]: https://en.wikipedia.org/wiki/Hierarchical_File_System
 [HFSPlus]: http://ntfs.com/hfs.htm
 [ArsTechnica]: https://arstechnica.com/gadgets/2016/06/new-apfs-file-system-spotted-in-new-version-of-macos/
@@ -103,3 +102,4 @@ So far, I think that <abbr>APFS</abbr> is a very neat and stable system. I think
 [^1]: It's a little more complicated than that, I know.
 [^2]: Unless your operating system uses a microkernel. But that's very unlikely.
 [^3]: VirtualBox, for example, uses a kernel module that manages to crash my macOS occasionally. 
+[^4]: Unless they are [currently in jail][Reiser], I suppose. 
