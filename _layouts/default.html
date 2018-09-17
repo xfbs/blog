@@ -23,7 +23,14 @@
 
     <footer>
       <span>
-        Made with <a href="https://jekyllrb.com">Jekyll</a> using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+        <a href="{{ '/legal' | prepent: site.baseurl }}">Legal</a> &middot; 
+        <a href="{{ '/privacy' | prepent: site.baseurl }}">Privacy</a> &middot; 
+        Made with <a href="https://jekyllrb.com">Jekyll</a> using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme &middot;
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/" title="Licensed under Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)">
+          <img title="Creative Commons" src="{{ '/assets/images/cc-logo.svg' | prepend: site.baseurl }}" class="cc-icon" />
+          <img title="Share" src="{{ '/assets/images/cc-sa.svg' | prepend: site.baseurl }}" class="cc-icon" />
+          <img title="Adapt" src="{{ '/assets/images/cc-sa.svg' | prepend: site.baseurl }}" class="cc-icon" />
+        </a>
       </span>
     </footer>
   </body>
