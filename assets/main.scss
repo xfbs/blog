@@ -198,4 +198,9 @@ footer img.cc-icon:hover {
 .post .footnotes {
   margin-top: 2rem;
   border-top: dotted 1px $shadow-color;
+} 
+
+.post p {
+  hyphens: auto;
 }
+
