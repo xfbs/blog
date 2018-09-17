@@ -1,6 +1,7 @@
 ---
 title: Privacy
 layout: post
+permalink: /privacy/
 ---
 
 >   This is the internet, you have no privacy.[^1] 

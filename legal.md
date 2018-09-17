@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Legal
+permalink: /legal/
 ---
 
 This blog is a private non-commercial website. All content is either owned by me or available freely (for non-commercial use). Unless otherwise noted, all content owned by me is licensed under [CC BY-SA 4.0][].
