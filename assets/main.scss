@@ -180,3 +180,22 @@ table {
     }
   }
 }
+
+img.cc-icon {
+  display: inline;
+  width: 0.8em;
+  margin: -0.05em -0.05em;
+}
+
+footer img.cc-icon {
+  filter: invert(.5);
+}
+
+footer img.cc-icon:hover {
+  filter: invert(.4) sepia(1) saturate(5) hue-rotate(175deg);
+}
+
+.post .footnotes {
+  margin-top: 2rem;
+  border-top: dotted 1px $shadow-color;
+}
