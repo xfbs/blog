@@ -37,8 +37,9 @@ My email address is public knowledge and can be looked up by checking out my <ab
 As it is unwise to provide my real address online, here is an address that you can use to send me letters. Note that I might not read them, if you want to contact me I recommend sending me an email.
 
     Patrick Elsen  
-    Fiction Street 59
-    12345 Sampledorf
+    Nordstrasse 5
+    DE-99427 Weimar
+    Germany
 
 [^1]: Excerpt from <abbr>TMG</abbr> paragraph 5. [Full text][TMG §5].
 [^2]: Excerpt from <abbr>DL-InfoV</abbr> paragraph 1. [Full text][DL-InfoV §1].
