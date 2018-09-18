@@ -1,6 +1,6 @@
 SERVE_PORT   = 4001
 SERVE_FLAGS += --livereload
-SERVE_FLAGS += --incremental
+#SERVE_FLAGS += --incremental
 SERVE_FLAGS += --drafts
 SERVE_FLAGS += --unpublished
 SERVE_FLAGS += --port $(SERVE_PORT)
