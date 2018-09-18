@@ -15,7 +15,7 @@ plugins:
   - jekyll-youtube
   - jekyll-typogrify
 
-permalink: /posts/:year-:month-:day/:title
+permalink: /posts/:title
 paginate: 25
 exclude:
   - Makefile
