@@ -17,3 +17,7 @@ plugins:
 
 permalink: /posts/:year-:month-:day/:title
 paginate: 25
+exclude:
+  - Makefile
+  - Gemfile
+  - Gemfile.lock
