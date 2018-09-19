@@ -136,7 +136,8 @@ table {
   margin-bottom: 1rem;
 
   @media (max-width: 600px) {
-    margin: -12px -18px;
+    //margin: -12px -18px;
+    margin: -12px 0;
   }
 
   div {
@@ -176,6 +177,9 @@ table {
 
       @media (max-width: 600px) {
         font-size: 60%;
+        width: 72px;
+        margin-right: -12px;
+        margin-left: -12px;
       }
     }
   }
