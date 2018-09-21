@@ -4,7 +4,7 @@ title: "Srcery Colorscheme"
 date: 2018-09-21
 ---
 
-This week I had to set up a bunch of thinga for work. Since I spend a lot of time on the command line, I wanted to make it look comfortable. At first, I went with the default of black text on a white background, but soon enough I got tired of that. It's more comfortable to look at a darker background. So I played around a bit and tried switching things around, but it never looked just right. 
+This week I had to set up a bunch of things for work. Since I spend a lot of time on the command line, I wanted to make it look comfortable. At first, I went with the default of black text on a white background, but soon enough I got tired of that. It's more comfortable to look at a darker background. So I played around a bit and tried switching things around, but it never looked just right. 
 
 I need to get things to a state where I'm comfortable using them, but I want to refrain from customizing things too much, because it's too much of a distration. It's better to use things as they are out-of-the-box, or maybe install a little plugin, but I don't really want to have to manually tweak things.
 
