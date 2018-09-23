@@ -10,14 +10,13 @@ Today I spent some time exploring <abbr>ffmpeg</abbr>. Kind of unintentionally, 
 
 Modern laptops have really insane resolutions. I remember those old <abbr title="Cathode Ray Tube">CRT</abbr>s that had a resolution of maybe 1024x768. And those were considered fancy back them. There's a good chance that you are older than me, so back in your time, things may have been even smaller. But modern laptops and their fancy high-pixel-density screens have a lot more pixels: on my laptop, which has a 13" screen, I have a resolution of about 2500x1800. 
 
-
-
-
 Now, obviously when recording the screen, all these pixels have to be stored somewhere. So it's not surprising to see large files being output by QuickTime. After recording for about thirty minutes, I got a 4<abbr>GB</abbr> file. With the poor internet that I have in my apartment, it would take months to upload a file like that.
 
 Thankfully, these days we have efficient codecs that can drastically reduce file sizes. There's plenty to choose from, and they all have individual advantages. But the most popular format these days is <abbr>x264</abbr> with <abbr>aac</abbr> audio in a <abbr>mp4</abbr> container.
 
 And this is where <abbr>ffmpeg</abbr> enters. It's an open source tool that allows one to transcode video and audio files. Using it, I can take my file, which is already compressed, just not very much, and squeeze it into a very small file. I can also change the resolution, framerate, bitrate, audio codec, the options are almost unlimited.
+
+![Video before and after transcoding with ffmpeg](/assets/images/ffmpeg-files.png)
 
 But not all video is created equal. Screencasts of people typing into consoles can be compressed much more without losing too much quality than films of nature with a lot of moving parts. So the trick is to tweak the settings to get them just right: to get a video that is small, yet has a good quality. And that is exactly what I did. I mean, I tried. You'll see.
 
@@ -98,6 +97,10 @@ This one I don't completely understand. From what I do understand, there are mul
 With these settings, I am able to convert a 255<abbr>MB</abbr> file down to just 5<abbr>MB</abbr> without losing any noticable quality. I think that is a really good result. 
 
 The one downside is that transcoding is quite computationally intensive. For a 30-minute video at my screen's native resolution, my laptop needs around 40 minutes to transcode it with the invocation that I documented here. That's alright for me since I don't have that many things to transcode, but this is an example where it does make sense to get a beefier machine if you do this kind of stuff often.
+
+As a demonstration, I've recorded myself writing this blog post. It was originally a 5<abbr>GB</abbr> video, but I sped it up (since I type slow and it's boring to watch) four times and downscaled it. I ended up with a ten minutes long, 30<abbr>MB</abbr>  large 2K quality file. Success!
+
+{% include vimeo.html id=291406117 %}
 
 ## Conclusion
 
