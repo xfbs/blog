@@ -4,68 +4,100 @@ date: 2018-09-23
 title: Tweaking ffmpeg
 ---
 
-Today I explored and played with ffmpeg. Kind of unintentionally, actually. I was playing around with QuickTime, recording some screencasts, just to see what it can do. It's actually pretty easy to do! You just open QuickTime, hit the 'New Screen Recording' menu button and off you go. But there was one problem.
+Today I spent some time exploring <abbr>ffmpeg</abbr>. Kind of unintentionally, actually. I actually just wanted to record some screencasts with QuickTime to see what it can do. I didn't know how easy it was---just open up QuickTime, select New Screen Recording, and off you go. But there is one issue.
 
-Of course, these days laptops have very large screen resolutions. Even small 13" laptops like mine have a better resolution than full HD (which is 1680 by 1080 pixels) thanks to the increased pixel density. This means that when you make screen recordings, there is a *hell* of a lot of data the needs to be stored. 
+Modern laptops have really insane resolutions. I remember those old <abbr title="Cathode Ray Tube">CRT</abbr>s that had a resolution of maybe 1024x712. And those were considered fancy back them. There's a good chance that you are older than me, so back in your time, things may have been even smaller. But modern laptops and their fancy high-pixel-density screens have a lot more pixels: on my laptop, which has a 13" screen, I have a resolution of about 2500x1800. 
 
-The result is that even a 30-minute screen recording can easily get up to 4GB in size. With my slow internet connection, uploading such a recording to anywhere would take months. But thankfully, I don't have to: there a re awesome tools like *ffmpeg* that let me re-encodde my screencasts and other movies and videos. It is very flexible, I can tell it which resolution, framerate or quality I want, and it does it. It takes a long time: on my machine, re-encoding a 30-minute screencast, which is around 2500 by 1800 pixels and 4GB in size, takes about 40 minutes. But the resulting file is much smaller: it can be less than 100MB, if I choose a high compression ratio.
+Now, obviously when recording the screen, all these pixels have to be stored somewhere. So it's not surprising to see large files being output by QuickTime. After recording for about thirty minutes, I got a 4<abbr>GB</abbr> file. With the poor internet that I have in my apartment, it would take months to upload a file like that.
 
-## Options
+Thankfully, these days we have efficient codecs that can drastically reduce file sizes. There's plenty to choose from, and they all have individual advantages. But the most popular format these days is <abbr>x264</abbr> with <abbr>aac</abbr> audio in a <abbr>mp4</abbr> container.
 
-The trick is that *ffmpeg* takes a *lot* of options, and you have to tweak them just right to get the desired quality you want, without it being a huge file size. And that is exactly what I did. So, let me show you which options I have found to work, and what they do.
+And this is where <abbr>ffmpeg</abbr> enters. It's an open source tool that allows one to transcode video and audio files. Using it, I can take my file, which is already compressed, just not very much, and squeeze it into a very small file. I can also change the resolution, framerate, bitrate, audio codec, the options are almost unlimited.
 
-    ffmpeg -i input.mov -movflags +faststart -c:v libx264 -r 30 -vf scale=-1:1440 -crf 25 -preset slow -profile:v high -level 4.0 -c:a aac -b:a 192k -ar 48000 -pic_fmt yuv420p output.mp4
+But not all video is created equal. Screencasts of people typing into consoles can be compressed much more without losing too much quality than films of nature with a lot of moving parts. So the trick is to tweak the settings to get them just right: to get a video that is small, yet has a good quality. And that is exactly what I did. I mean, I tried. You'll see.
 
-That is one hell of a long line. So, let's take it apart. The basic invocation of <abbr>ffmpeg</abbr> is very simple.
+## Installing
+
+Before I could do anything with <abbr>ffmpeg</abbr>, I first had to install it. For me, this was easy, since I have a package manager that does that for me. If you aren't so lucky, you'll probably find an installer somewhere on the net. But I used [homebrew][homebrew] to get everything set up.
+
+    brew install ffmpeg
+
+I read online that another project, which started out as a fork of <abbr>ffmpeg</abbr>, had it's own binary with the same name and invocation[^avconv]. Confusing! But form what I gathered, that's no longer the case. 
+
+## Basic Usage
+
+To transcode anything with <abbr>ffmpeg</abbr>, all you need to do is call it on the console. You need to give it an input file and specify an output. It can automatically recognize the extensions and it generally does what you'd expect.
 
     ffmpeg -i input.mov output.mp4
 
-With this invocation, <abbr>ffmpeg</abbr> will transcode the file *input.mov* into the file *output.mp4*. But with this invocation, we can't really control what it does except changing the container format from <abbr>mov</abbr> to <abbr>mp4</abbr>. So, we can specify some additional flags to control it's behaviour.
+It can even do some fancy things such as capture the screen.
+
+    ffmpeg -f ?? 
+
+However, I didn't find that to be terribly useful, as QuickTime does a better job. But it is interesting if you want to stream your screen to somewhere.
+
+## Tweaking
+
+The interesting bit is the options that <abbr>ffmpeg</abbr> offers. And these are also somewhat confusing. For me, what I ended up using to convert my videos was a rather complicated invocation, and I needed to do a bunch of research to figure everything out to get there.
+
+    ffmpeg -i input.mov -c:v libx264 -r 30 -vf scale=-1:1440 -crf 25 -preset slow -profile:v high -level 4.0 -c:a aac -b:a 192k -ar 48000 -pix_fmt yuv420p -movflags +faststart output.mp4
+
+I'm not an expert on <abbr>ffmpeg</abbr> in any way, and if you want to do anything fancy, you'll have to google it just like I did. But I can explain to you what these options do and why I chose them. So let's examine them, one by one.
+
+    -i input.mov
+
+This specifies that we are reading from the file `input.mov`. 
 
     -c:v libx264
 
-With this flag, we can tell <abbr>ffmpeg</abbr> to use the libx264 encoder for the video (notice the `v` in `-c:v`?). But then, we need to give some additional options to that.
+This specifies that the codec we want to use (`-c`) for the video stream (`:v`) is x264 (`libx264`). There are other codecs out there, some with better compression, but this one has a very broad support and good characteristics.
 
     -r 30
 
-By default, QuickTime will record videos in 60fps. That's nice for smooth motion, but it does use up a lot of space, and for screen recordings it doesn't do anything. So with with flag, I can tell it to change the video to 30 frames per second.
+QuickTime records my screen with 60fps. That's great because it's more smooth, but for screencasts you don't really need all those extra frames, especially because they use up storage. So here I tell <abbr>ffmpeg</abbr> to reduce it down to 30fps.
 
-    -vf scale=-1:1440
+    -vf scape=-1:1440
 
-QuickTime will also record screen recordings in my native screen resolution. It looks crisp and clear, but again takes up a lot of space. With this command I recode that to 1440p, also known as 2k. You can also use `scale=-1:1080` for 1080p or `scale=-1:720` for 720p, or any resolution you like. The trick is the `-1` --- that means that ffmpeg will figure out the correct other number without distorting your video.
+QuickTime also records my screen in its full, native resolution. Nice because you get that beautiful, crisp look, but horrible when it comes to file sizes. I set this to 1440p, which is also known as 2K. You can set this to anything you like, including full HD (1080p), HD (720p), or just any size you like in pixels. The -1 here means that the other number is computed automatically. 
 
     -crf 25
 
-This one is interesting. It controls the quality of the video. There are multiple methods for controlling the quality, you can set an average bitrate, you can set the minimum and maximum bitrate, or you can use this setting. The interesting thing here is that it keeps the quality constant, meaning that when the video gets more complex, it doesn't immediately get pixelated. This might not be what you want.
+This one is a little bit special. Basically, there are multiple methods to tell <abbr>ffmpeg</abbr> how much it should compress and what quality and file size you'd like. One way is to set a bandwidth, but this doesn't always make sense because some parts of the video will need more (and they will be downgraded if the bandwidth is too low) whereas other parts will need less (so you will waste space with a constant bandwidth). The <abbr>crf</abbr> means that you want a constant quality, which you can set between no compression (0) and maximum compression (51). This is good because it means that all parts have the same quality, regardless of how complex the scenes are.
 
     -preset slow
 
-The preset is a collection of default settings for the encoder. This specifies how much computation the encoder should use. Slower means you get better quality for the same size, but it also uses more computing power to do so. If you have a beefy machine, you can set this to `slowest`. You can get additional information about this by running `x264 --fullhelp`, if you have it installed.
+There are some options that control how much <abbr>CPU</abbr> power <abbr>ffmpeg</abbr> invests to compress the video. This option tells it to favour using more <abbr>CPU</abbr> power to get a better compression. If you have a beefier machine, you can even set it to *slowest*. It will take longer, but you'll get a better quality for the same file size.
 
     -profile:v high -level 4.0
 
-These two settings determine how compatible the resulting video will be. From what I understand, some capabilities that result in better quality are not supported by older devices, such as the iPhone 4.
-
-    -movflags +faststart
-
-This is a little involved. It makes sure that the `moov` section is at the beginning of the file. From what I understand, this means that it's faster to play the file because the decoder has the information right at the beginning.
+From what I understand, these flags enable some features in the codec that might not be supported by all video players. There is [a table][x264-profile-support] that shows which devices need which settings. With these, some of the more fancy features are enabled, but devices before the iPhone 4S might not be able to play them.
 
     -c:a aac
 
-This setting determines which audio codec ffmpeg will use. In this case, I opted for aac. 
+This tells <abbr>ffmpeg</abbr> to use <abbr>aac</abbr> for the audio codec. You can also tell it to not touch the audio and just pass it through. 
 
     -b:a 192k
 
-This setting determines the bitrate to be used for the audio. Since I'm only recording voice, 192kbps is more than enough, however for music it might be better to bump this up.
+Since these screencasts don't have any music in them, I can lower the bitrate of the audio to 192kbps. This is more than enough for voice.
 
-    -at 48000
+    -ar 48000
 
-This makes sure that the sample rate of the audio is 48kHz. 
+Here we are telling the audio codec that we want the audio to have a sample rate of 48kHz. 
 
-    -pic_fmt yuv420p
+    -pix_fmt yuv420p
 
-This sets the pixel encoding. From what I understand, this setting is the most sensible.
+This one I don't completely understand. From what I do understand, there are multiple ways to encode pixels, one of the most well-known encodings would be RGBA, which is a 32-bit encoding. Apparently <abbr>yuv420p</abbr> is a sensible choice here.
 
 ## Results
 
-As you can see, encoding a video is not a trivial task. These settings work well for me, but they might not be ideal for other kinds of encoding tasks. 
+With these settings, I am able to convert a 255<abbr>MB<abbr> file down to just 5<abbr>MB</abbr> without losing any noticable quality. I think that is a really good result. 
+
+The one downside is that transcoding is quite computationally intensive. For a 30 minute file, my laptop needs around 40 minutes to transcode it with the invocation that I documented here. For me that's alright, but some people may prefer to do this on a beefier machine.
+
+## Conclusion
+
+Codecs are amazing. It feels like magic when you have a secret command that you can run to get your video file down to just two percent of its size. But there is actually a lot of engineering behind that, not anything supernatural. It's not easy to hit that sweet spot where you have a file with a good quality, yet a small file size, but it is possible. It just takes some time and experimentation.
+
+[x264-profile-support]: todo
+[homebrew]: https://brew.sh/
+[^avconv]: See <todo link>
