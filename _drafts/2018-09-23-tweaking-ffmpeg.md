@@ -2,6 +2,7 @@
 layout: post
 date: 2018-09-23
 title: Tweaking ffmpeg
+summary: "Today I spent some time exploring <abbr>ffmpeg</abbr>. Kind of unintentionally, actually. I actually just wanted to record some screencasts with QuickTime to see what it can do. But the files it generates are huge—5GB for just 30 minutes of video. <abbr>ffmpeg</abbr> to the rescue!"
 ---
 
 Today I spent some time exploring <abbr>ffmpeg</abbr>. Kind of unintentionally, actually. I actually just wanted to record some screencasts with QuickTime to see what it can do. I didn't know how easy it was---just open up QuickTime, select New Screen Recording, and off you go. But there is one issue.
