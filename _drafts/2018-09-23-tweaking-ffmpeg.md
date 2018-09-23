@@ -6,7 +6,12 @@ title: Tweaking ffmpeg
 
 Today I spent some time exploring <abbr>ffmpeg</abbr>. Kind of unintentionally, actually. I actually just wanted to record some screencasts with QuickTime to see what it can do. I didn't know how easy it was---just open up QuickTime, select New Screen Recording, and off you go. But there is one issue.
 
-Modern laptops have really insane resolutions. I remember those old <abbr title="Cathode Ray Tube">CRT</abbr>s that had a resolution of maybe 1024x712. And those were considered fancy back them. There's a good chance that you are older than me, so back in your time, things may have been even smaller. But modern laptops and their fancy high-pixel-density screens have a lot more pixels: on my laptop, which has a 13" screen, I have a resolution of about 2500x1800. 
+![ffmpeg transcoding a video](/assets/images/ffmpeg-terminal.png)
+
+Modern laptops have really insane resolutions. I remember those old <abbr title="Cathode Ray Tube">CRT</abbr>s that had a resolution of maybe 1024x768. And those were considered fancy back them. There's a good chance that you are older than me, so back in your time, things may have been even smaller. But modern laptops and their fancy high-pixel-density screens have a lot more pixels: on my laptop, which has a 13" screen, I have a resolution of about 2500x1800. 
+
+
+
 
 Now, obviously when recording the screen, all these pixels have to be stored somewhere. So it's not surprising to see large files being output by QuickTime. After recording for about thirty minutes, I got a 4<abbr>GB</abbr> file. With the poor internet that I have in my apartment, it would take months to upload a file like that.
 
@@ -30,15 +35,15 @@ To transcode anything with <abbr>ffmpeg</abbr>, all you need to do is call it on
 
     ffmpeg -i input.mov output.mp4
 
-It can even do some fancy things such as capture the screen.
+It can even do some fancy things such as [capture the screen][ffmpeg-desktop-capture].
 
-    ffmpeg -f ?? 
+    ffmpeg -f avfoundation -i 0:1 output.mkv
 
 However, I didn't find that to be terribly useful, as QuickTime does a better job. But it is interesting if you want to stream your screen to somewhere.
 
 ## Tweaking
 
-The interesting bit is the options that <abbr>ffmpeg</abbr> offers. And these are also somewhat confusing. For me, what I ended up using to convert my videos was a rather complicated invocation, and I needed to do a bunch of research to figure everything out to get there.
+The interesting bit is the [options][ffmpeg-options] that <abbr>ffmpeg</abbr> offers. And these are also somewhat confusing. For me, what I ended up using to convert my videos was a rather complicated invocation, and I needed to do a bunch of research to figure everything out to get there.
 
     ffmpeg -i input.mov -c:v libx264 -r 30 -vf scale=-1:1440 -crf 25 -preset slow -profile:v high -level 4.0 -c:a aac -b:a 192k -ar 48000 -pix_fmt yuv420p -movflags +faststart output.mp4
 
@@ -58,7 +63,7 @@ QuickTime records my screen with 60fps. That's great because it's more smooth, b
 
     -vf scape=-1:1440
 
-QuickTime also records my screen in its full, native resolution. Nice because you get that beautiful, crisp look, but horrible when it comes to file sizes. I set this to 1440p, which is also known as 2K. You can set this to anything you like, including full HD (1080p), HD (720p), or just any size you like in pixels. The -1 here means that the other number is computed automatically. 
+QuickTime also records my screen in its full, native resolution. Nice because you get that beautiful, crisp look, but horrible when it comes to file sizes. I set this to 1440p, which is also known as 2K. You can set this to anything you like, including full HD (1080p), HD (720p), or just any size you like in pixels. The `-1` here means that the other number is computed automatically. 
 
     -crf 25
 
@@ -70,7 +75,7 @@ There are some options that control how much <abbr>CPU</abbr> power <abbr>ffmpeg
 
     -profile:v high -level 4.0
 
-From what I understand, these flags enable some features in the codec that might not be supported by all video players. There is [a table][x264-profile-support] that shows which devices need which settings. With these, some of the more fancy features are enabled, but devices before the iPhone 4S might not be able to play them.
+From what I understand, these flags enable some features in the codec that might not be supported by all video players. There is a table[^x264-profile-support] that shows which devices need which settings. With these here, some of the more fancy features are enabled, but devices before the iPhone 4S might not be able to play them.
 
     -c:a aac
 
@@ -90,14 +95,18 @@ This one I don't completely understand. From what I do understand, there are mul
 
 ## Results
 
-With these settings, I am able to convert a 255<abbr>MB<abbr> file down to just 5<abbr>MB</abbr> without losing any noticable quality. I think that is a really good result. 
+With these settings, I am able to convert a 255<abbr>MB</abbr> file down to just 5<abbr>MB</abbr> without losing any noticable quality. I think that is a really good result. 
 
-The one downside is that transcoding is quite computationally intensive. For a 30 minute file, my laptop needs around 40 minutes to transcode it with the invocation that I documented here. For me that's alright, but some people may prefer to do this on a beefier machine.
+The one downside is that transcoding is quite computationally intensive. For a 30-minute video at my screen's native resolution, my laptop needs around 40 minutes to transcode it with the invocation that I documented here. That's alright for me since I don't have that many things to transcode, but this is an example where it does make sense to get a beefier machine if you do this kind of stuff often.
 
 ## Conclusion
 
 Codecs are amazing. It feels like magic when you have a secret command that you can run to get your video file down to just two percent of its size. But there is actually a lot of engineering behind that, not anything supernatural. It's not easy to hit that sweet spot where you have a file with a good quality, yet a small file size, but it is possible. It just takes some time and experimentation.
 
-[x264-profile-support]: todo
+[ffmpeg-options]: https://ffmpeg.org/ffmpeg.html
+[^x264-profile-support]: See [Encode/H.264](H.264) on the <abbr>ffmpeg</abbr> wiki.
 [homebrew]: https://brew.sh/
-[^avconv]: See <todo link>
+[H.264]: https://trac.ffmpeg.org/wiki/Encode/H.264
+[^avconv]: See [this StackOverflow question](https://stackoverflow.com/questions/9477115/what-are-the-differences-and-similarities-between-ffmpeg-libav-and-avconv) for a little bit of background.
+[^rate-control]: See [this great article](https://slhck.info/video/2017/03/01/rate-control.html) by Werner Robitza about rate control modes.
+[ffmpeg-desktop-capture]: https://trac.ffmpeg.org/wiki/Capture/Desktop
