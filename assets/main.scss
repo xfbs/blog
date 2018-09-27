@@ -2,8 +2,9 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-@import 'flag-icon';
+@import 'fonts';
 @import 'tale';
+@import 'flag-icon';
 
 $serif-primary: 'Vollkorn', 'Libre Baskerville', 'Baskerville', 'Times New Roman', Times, serif;
 $serif-smallcaps: 'Vollkorn SC', $serif-primary;
@@ -60,7 +61,8 @@ footer,
 
 // make abbr show it as small caps
 abbr {
-  font-family: $serif-smallcaps;
+  // font-family: $serif-smallcaps;
+  font-feature-settings: 'smcp';
   text-transform: lowercase;
 }
 

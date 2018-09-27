@@ -1,0 +1,6 @@
+@import 'fonts/variables';
+@import 'fonts/font-face';
+
+@include font-face('Vollkorn', 'Vollkorn-Regular');
+@include font-face('Vollkorn', 'Vollkorn-Bold', 700);
+@include font-face('Vollkorn', 'Vollkorn-Italic', 400, italic);
