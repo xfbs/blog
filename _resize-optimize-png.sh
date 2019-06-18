@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for file in assets/images/*.png; do
+for file in $@; do
   echo "scaling '$file' down to maximally 1600 pixels in width"
   convert -verbose "$file" -resize "1600x>" "$file"
 
