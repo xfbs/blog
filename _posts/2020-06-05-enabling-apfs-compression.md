@@ -238,6 +238,8 @@ it and can be done easily with [afsctool](https://github.com/RJVB/afsctool).
 I was able to save about 11GB of storage easily. I might also set up a cron
 job to compress my code projects folder periodically.
 
+![Disk Usage reported by Daisy Disk after compression](/assets/images/disk-usage-after.png)
+
 I don't know why this feature isn't more well-known. Apple uses it internally
 for some files, but I'm not aware of any way to compress files from the UI. I
 presume it just hasn't been tested enough yet.
